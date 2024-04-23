@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Despesas Mensais</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Cadastro de Despesas Mensais</h1>
+    <form id="expenseForm">
+        <label for="aluguel">Aluguel:</label>
+        <input type="number" id="aluguel" name="aluguel" required><br>
+
+        <label for="agua">Água:</label>
+        <input type="number" id="agua" name="agua" required><br>
+
+        <label for="energia">Energia Elétrica:</label>
+        <input type="number" id="energia" name="energia" required><br>
+
+        <label for="folhaPagamento">Folha de Pagamento:</label>
+        <input type="number" id="folhaPagamento" name="folhaPagamento" required><br>
+
+        <label for="impostos">Impostos:</label>
+        <input type="number" id="impostos" name="impostos" required><br>
+
+        <button type="button" onclick="calcular()">Calcular</button>
+    </form>
+    <div id="results"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
