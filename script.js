@@ -1,5 +1,5 @@
 // Senha correta
-const senhaCorreta = "receberpix"; // Mantemos a senha original
+const senhaCorreta = "receberpix"; 
 
 function verificarLogin() {
     var email = document.getElementById('email').value;
