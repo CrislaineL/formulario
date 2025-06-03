@@ -10,7 +10,7 @@ function verificarLogin() {
 
     if (email === emailCorreto && senha === senhaCorreta) {
         resultsDiv.innerHTML = `<h2>Login bem-sucedido!</h2>`;
-        window.location.href = "outra_pagina.html"; // Redireciona após login bem-sucedido
+        window.location.href = "home.html"; // Redireciona após login bem-sucedido
     } else {
         resultsDiv.innerHTML = `<h2>Login falhou. Verifique seu e-mail e senha.</h2>`;
     }
