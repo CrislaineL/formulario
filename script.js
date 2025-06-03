@@ -1,11 +1,11 @@
 // Senha correta
-const senhaCorreta = "senha123"; // Mantemos a senha original
+const senhaCorreta = "receberpix"; // Mantemos a senha original
 
 function verificarLogin() {
     var email = document.getElementById('email').value;
     var senha = document.getElementById('senha').value;
 
-    var emailCorreto = "usuario@example.com";
+    var emailCorreto = "todomundogostade@gmail.com";
     var resultsDiv = document.getElementById('results');
 
     if (email === emailCorreto && senha === senhaCorreta) {
