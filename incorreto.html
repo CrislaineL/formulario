@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incorreto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #ff0015;
+      color: #721c24;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(114, 28, 36, 0.5);
+    }
+    #blockOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      color: white;
+      font-size: 2em;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Incorreto</h1>
+  <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="Erro" />
+
+  <div id="blockOverlay">Acesso negado!</div>
+
+  <script>
+    function blockAccess() {
+      const overlay = document.getElementById('blockOverlay');
+      overlay.style.display = 'flex';
+    }
+
+    // Impede atalhos: F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || e.keyCode === 123 ||
+          (e.ctrlKey && e.shiftKey && (e.key.toLowerCase() === 'i' || e.key.toLowerCase() === 'j')) ||
+          (e.ctrlKey && e.key.toLowerCase() === 'u')) {
+        e.preventDefault();
+        blockAccess();
+        return false;
+      }
+    });
+
+    // Desabilitar clique direito do mouse
+    window.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      blockAccess();
+      return false;
+    });
+
+    // Detecta abertura do DevTools (não 100% seguro, mas tenta)
+    let lastWidth = window.outerWidth - window.innerWidth;
+    let lastHeight = window.outerHeight - window.innerHeight;
+
+    setInterval(() => {
+      const widthDiff = window.outerWidth - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+
+      if (widthDiff !== lastWidth || heightDiff !== lastHeight) {
+        blockAccess();
+      }
+      lastWidth = widthDiff;
+      lastHeight = heightDiff;
+    }, 500);
+  </script>
+</body>
+</html>

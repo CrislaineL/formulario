@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Outra Página</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Overlay para bloquear a página */
+        #blockOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.85);
+            color: white;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="Bem-Vindo">Bem-Vindo</h1>
+
+    <script>
+        // Pergunta se o usuário está logado
+        const isLoggedIn = confirm("Você está logado?");
+        
+        if (isLoggedIn) {
+            const senha = prompt("Qual é a sua senha?");
+            // Verifica a senha
+            if (senha === "senha123") {
+                alert("Senha correta! Bem-vindo novamente.");
+            } else {
+                alert("Senha incorreta! Redirecionando para o formulário.");
+                window.location.href = "formulario.html";
+            }
+        } else {
+            alert("Você não está logado! Redirecionando para o formulário.");
+            window.location.href = "formulario.html";
+        }
+
+        // Função para bloquear toda interação e mostrar overlay
+        function blockAccess() {
+            if (!document.getElementById('blockOverlay')) {
+                const overlay = document.createElement('div');
+                overlay.id = 'blockOverlay';
+                overlay.textContent = 'Acesso negado!';
+                document.body.appendChild(overlay);
+            }
+        }
+
+        // Impede atalhos: F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        window.addEventListener('keydown', function (e) {
+            // Detecta F12
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                blockAccess();
+                setTimeout(() => {
+                    window.location.href = "incorreto.html";
+                }, 1000);
+                return false;
+            }
+            // Detecta Ctrl+Shift+I (DevTools - Inspector)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+                e.preventDefault();
+                blockAccess();
+                setTimeout(() => {
+                    window.location.href = "incorreto.html";
+                }, 1000);
+                return false;
+            }
+            // Detecta Ctrl+Shift+J (DevTools - Console)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+                blockAccess();
+                setTimeout(() => {
+                    window.location.href = "incorreto.html";
+                }, 1000);
+                return false;
+            }
+            // Detecta Ctrl+U (View Source)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+                blockAccess();
+                setTimeout(() => {
+                    window.location.href = "incorreto.html";
+                }, 1000);
+                return false;
+            }
+        });
+
+        // Desabilitar clique direito do mouse
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            blockAccess();
+            setTimeout(() => {
+                window.location.href = "incorreto.html";
+            }, 1000);
+            return false;
+        });
+
+        // Tenta detectar abertura do DevTools continuamente (não infalível)
+        let lastWidth = window.outerWidth - window.innerWidth;
+        let lastHeight = window.outerHeight - window.innerHeight;
+
+        setInterval(() => {
+            const widthDiff = window.outerWidth - window.innerWidth;
+            const heightDiff = window.outerHeight - window.innerHeight;
+
+            if (widthDiff !== lastWidth || heightDiff !== lastHeight) {
+                blockAccess();
+                setTimeout(() => {
+                    window.location.href = "incorreto.html";
+                }, 1000);
+            }
+            lastWidth = widthDiff;
+            lastHeight = heightDiff;
+        }, 500);
+
+    </script>
+</body>
+</html>
+
